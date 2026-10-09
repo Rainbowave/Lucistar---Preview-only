@@ -1,0 +1,47 @@
+{
+  "name": "new-version",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node --experimental-strip-types server.ts",
+    "dev": "tsx server.ts",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@google/genai": "^1.31.0",
+    "@types/express": "^5.0.6",
+    "adm-zip": "^0.5.16",
+    "better-sqlite3": "^12.8.0",
+    "express": "^5.2.1",
+    "firebase": "^11.1.0",
+    "hls.js": "1",
+    "jquery": "^4.0.0",
+    "lodash": "^4.17.23",
+    "lucide-react": "^0.556.0",
+    "motion": "^12.34.4",
+    "re-resizable": "^6.11.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-draggable": "^4.5.0",
+    "react-router-dom": "^7.10.1",
+    "recharts": "^2.15.4",
+    "stripe": "^20.1.0",
+    "tsx": "^4.21.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/lodash": "^4.17.24",
+    "@types/node": "^22.14.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^5.0.0",
+    "autoprefixer": "^10.4.27",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.2.1",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.0"
+  }
+}

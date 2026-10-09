@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+@theme {
+  --animate-floatUp: floatUp 2s ease-out forwards;
+  --animate-scroll-bg: scrollBackground 10s linear infinite;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Inter", ui-monospace, SFMono-Regular, monospace;
+  --color-post: hsl(var(--post-background));
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(1); opacity: 0; }
+  10% { opacity: 1; transform: translateY(-10px) scale(1.2); }
+  100% { transform: translateY(-150px) scale(0.8); opacity: 0; }
+}
+
+@keyframes scrollBackground {
+  0% { background-position: 0 0; }
+  100% { background-position: 200px -150px; }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 20 97% 63%; /* #fc8347 */
+    --secondary: 43 94% 56%; /* #f7bf29 */
+    --brand-main: #fc8347;
+    --brand-second: #f7bf29;
+    --brand-mixed: linear-gradient(135deg, #fc8347 0%, #f7bf29 100%);
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 5px;
+  }
+ 
+  .dark {
+    --background: 240 4.3% 13.5%; /* #212124 */
+    --foreground: 0 0% 95%; /* #f2f2f2 */
+    --card: 240 6.3% 6.3%; /* #0F0F11 */
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 12.2%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 20 97% 63%; /* #fc8347 */
+    --secondary: 0 0% 20%; /* #333333 */
+    --brand-main: #fc8347;
+    --brand-second: #fc8347;
+    --brand-mixed: linear-gradient(135deg, #fc8347 0%, #fc8347 100%);
+    --primary-foreground: 0 0% 10%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 0 0% 20%;
+    --accent-foreground: 0 0% 95%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 95%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 20 97% 63%;
+    --post-background: 0 0% 9%; /* #171717 */
+  }
+}
+ 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    background-color: hsl(var(--background));
+    background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 6L10 10M10 6L6 10' stroke='white' stroke-opacity='0.08' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-size: 16px 16px;
+  }
+}
+
+/* Metadata Styles */
+header {
+}
+
+/* User Card and Actions Container */
+header > div:nth-of-type(1) > div:nth-of-type(2) {
+}
+
+/* User Card Itself */
+header > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1),
+div#root:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) {
+  background-color: #171717;
+}
+
+/* Action Button Containers (Notifications, Create, Settings) */
+header > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2) > div.relative {
+  border-radius: 8px;
+  margin: 0 2px;
+}
+
+/* Filter Bar Container (Home.tsx) */
+main#main-content > div:nth-of-type(1) > div:nth-of-type(1) {
+  z-index: 10 !important;
+}
+
+/* Filter Bar Inner */
+main#main-content > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) {
+}
+
+/* Timeline Feed Container */
+main#main-content > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) {
+  background-color: #101010 !important;
+  padding-left: 60px !important;
+  padding-right: 60px !important;
+  margin-left: 0px !important;
+  margin-top: -17px !important;
+  padding-top: 40px !important;
+}
+
+@layer utilities {
+  .bg-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 6L10 10M10 6L6 10' stroke='white' stroke-opacity='0.08' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-size: 16px 16px;
+  }
+  .bg-brand-mixed {
+    background: var(--brand-mixed);
+  }
+  .text-brand-mixed {
+    background: var(--brand-mixed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .border-brand-mixed {
+    border-image: var(--brand-mixed) 1;
+  }
+}
+
+/* Resizer Handles */
+.resizer-handle-top, .resizer-handle-bottom, .resizer-handle-left, .resizer-handle-right {
+  @apply bg-white/10 opacity-0 transition-opacity duration-300;
+}
+.group:hover .resizer-handle-top, .group:hover .resizer-handle-bottom, .group:hover .resizer-handle-left, .group:hover .resizer-handle-right {
+  @apply opacity-100 bg-primary/40;
+}
+.resizer-handle-corner {
+  @apply w-2 h-2 bg-primary opacity-0 transition-opacity duration-300 rounded-full;
+}
+.group:hover .resizer-handle-corner {
+  @apply opacity-100;
+}
+
+/* Styling from user request */
+div#root:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main#main-content:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) {
+  background-color: #151515;
+  border-width: 0px;
+  border-style: none;
+}
+div#root:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main#main-content:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) {
+  border-width: 1px;
+  border-style: none;
+}
+div#root:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main#main-content:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) {
+  background-color: #151515;
+}
+div#root:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main#main-content:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > button:nth-of-type(1) {
+  background-color: #fc8347;
+}

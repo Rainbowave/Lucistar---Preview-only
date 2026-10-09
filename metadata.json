@@ -1,0 +1,10 @@
+{
+  "name": "LuciStar",
+  "description": "LuciStar is the ultimate social platform for creators, featuring AI-powered verification, creative assistance, and high-performance content analytics with a mixed brand aesthetic.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ],
+  "theme_color": "#a10a39"
+}

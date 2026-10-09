@@ -1,0 +1,132 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "username": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "avatarUrl": { "type": "string" },
+        "role": { "type": "string", "enum": ["user", "creator", "moderator", "admin"] },
+        "status": { "type": "string", "enum": ["active", "banned"] },
+        "joinedAt": { "type": "string", "format": "date-time" },
+        "contentPreference": { "type": "string", "enum": ["dating", "adult"] },
+        "isPremium": { "type": "boolean" },
+        "walletBalance": { "type": "number" }
+      },
+      "required": ["uid", "username", "email"]
+    },
+    "Post": {
+      "title": "Post",
+      "description": "Content post (photo, video, short, comic, etc.)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "type": { "type": "string", "enum": ["PHOTO", "VIDEO", "SHORT", "COMIC", "PRODUCT", "COLLECTION"] },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "thumbnailUrl": { "type": "string" },
+        "heat": { "type": "number" },
+        "commentsCount": { "type": "number" },
+        "timestamp": { "type": "number" },
+        "isAdult": { "type": "boolean" },
+        "category": { "type": "string" }
+      },
+      "required": ["userId", "type", "title", "timestamp"]
+    },
+    "Comment": {
+      "title": "Comment",
+      "description": "Comment on a post",
+      "type": "object",
+      "properties": {
+        "postId": { "type": "string" },
+        "userId": { "type": "string" },
+        "username": { "type": "string" },
+        "text": { "type": "string" },
+        "timestamp": { "type": "number" }
+      },
+      "required": ["postId", "userId", "text", "timestamp"]
+    },
+    "ChatRoom": {
+      "title": "ChatRoom",
+      "description": "A chat room between users",
+      "type": "object",
+      "properties": {
+        "participants": { "type": "array", "items": { "type": "string" } },
+        "lastMessage": { "type": "string" },
+        "lastTimestamp": { "type": "number" }
+      },
+      "required": ["participants"]
+    },
+    "Message": {
+      "title": "Message",
+      "description": "A message in a chat room",
+      "type": "object",
+      "properties": {
+        "roomId": { "type": "string" },
+        "senderId": { "type": "string" },
+        "text": { "type": "string" },
+        "timestamp": { "type": "number" }
+      },
+      "required": ["roomId", "senderId", "text", "timestamp"]
+    },
+    "Trend": {
+      "title": "Trend",
+      "description": "Trending hashtags or tags",
+      "type": "object",
+      "properties": {
+        "tag": { "type": "string" },
+        "count": { "type": "string" },
+        "trend": { "type": "string" },
+        "section": { "type": "string" },
+        "image": { "type": "string" }
+      },
+      "required": ["tag", "section"]
+    },
+    "Follow": {
+      "title": "Follow",
+      "description": "User follow relationship",
+      "type": "object",
+      "properties": {
+        "followerId": { "type": "string" },
+        "followingId": { "type": "string" },
+        "timestamp": { "type": "object", "description": "Firestore serverTimestamp" }
+      },
+      "required": ["followerId", "followingId", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/posts/{postId}": {
+      "schema": "Post",
+      "description": "Content posts"
+    },
+    "/posts/{postId}/comments/{commentId}": {
+      "schema": "Comment",
+      "description": "Comments on posts"
+    },
+    "/chatRooms/{roomId}": {
+      "schema": "ChatRoom",
+      "description": "Chat rooms"
+    },
+    "/chatRooms/{roomId}/messages/{messageId}": {
+      "schema": "Message",
+      "description": "Messages in chat rooms"
+    },
+    "/trends/{trendId}": {
+      "schema": "Trend",
+      "description": "Trending topics"
+    },
+    "/follows/{followId}": {
+      "schema": "Follow",
+      "description": "User follow relationships"
+    }
+  }
+}

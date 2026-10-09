@@ -1,0 +1,148 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Slot Machine</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <style>
+        body {
+            background-color: transparent;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .slotwrapper {
+            margin-bottom: 30px;
+        }
+        .slotwrapper ul {
+            background-color: #fff;
+            color: #000;
+            border-radius: 10px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+        .slotwrapper ul li {
+            font-size: 60px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-spin {
+            background: linear-gradient(to right, #eab308, #f97316);
+            border: none;
+            color: black;
+            font-weight: 900;
+            padding: 15px 50px;
+            font-size: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            transition: all 0.2s;
+        }
+        .btn-spin:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.4);
+        }
+        .btn-spin:active {
+            transform: scale(0.95);
+        }
+        .result-msg {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            height: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slotwrapper" id="slot">
+        <ul>
+            <li>🍒</li>
+            <li>🍋</li>
+            <li>🍇</li>
+            <li>🍉</li>
+            <li>🔔</li>
+            <li>💎</li>
+            <li class="text-danger">7️⃣</li>
+        </ul>
+        <ul>
+            <li>🍒</li>
+            <li>🍋</li>
+            <li>🍇</li>
+            <li>🍉</li>
+            <li>🔔</li>
+            <li>💎</li>
+            <li class="text-danger">7️⃣</li>
+        </ul>
+        <ul>
+            <li>🍒</li>
+            <li>🍋</li>
+            <li>🍇</li>
+            <li>🍉</li>
+            <li>🔔</li>
+            <li>💎</li>
+            <li class="text-danger">7️⃣</li>
+        </ul>
+    </div>
+    
+    <button type="button" class="btn-spin" id="btn-spin">SPIN</button>
+    <div class="result-msg" id="result-msg"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="js/slotmachine.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#btn-spin').click(function() {
+                var btn = $(this);
+                btn.prop('disabled', true);
+                $('#result-msg').text('');
+                
+                // Randomly decide win or lose
+                var willWin = Math.random() < 0.3; // 30% win chance
+                var endNum = [];
+                
+                if (willWin) {
+                    var val = Math.floor(Math.random() * 7) + 1;
+                    endNum = [val, val, val];
+                } else {
+                    endNum = [
+                        Math.floor(Math.random() * 7) + 1,
+                        Math.floor(Math.random() * 7) + 1,
+                        Math.floor(Math.random() * 7) + 1
+                    ];
+                    // Prevent accidental win
+                    if (endNum[0] === endNum[1] && endNum[1] === endNum[2]) {
+                        endNum[2] = (endNum[2] % 7) + 1;
+                    }
+                }
+
+                $('#slot ul').playSpin({
+                    time: 2000,
+                    endNum: endNum,
+                    stopSeq: 'leftToRight',
+                    easing: 'easeOutBack',
+                    onFinish: function() {
+                        btn.prop('disabled', false);
+                        if (endNum[0] === endNum[1] && endNum[1] === endNum[2]) {
+                            $('#result-msg').css('color', '#4ade80').text('YOU WIN!');
+                        } else {
+                            $('#result-msg').css('color', '#f87171').text('TRY AGAIN');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
